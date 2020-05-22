@@ -15,18 +15,6 @@ public abstract class Control {
     return this.properties;
   }
 
-  public String getControlID() {
-    return this.properties.getIdentifier();
-  }
-
-  public String getAlias() {
-    return this.properties.getAlias();
-  }
-
-  public String getElementType() {
-    return this.properties.getElementType();
-  }
-
   public List<String> getIsDisplayedMethod() {
     return MethodBuilder.buildIsDisplayedMethod(properties);
   }

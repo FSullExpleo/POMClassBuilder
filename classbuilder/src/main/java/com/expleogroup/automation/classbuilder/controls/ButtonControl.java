@@ -10,6 +10,7 @@ public class ButtonControl extends Control implements IControlBuilder {
   }
 
   public List<String> getAllMethods() {
+    allMethods.clear();
     allMethods.addAll(getIsDisplayedMethod());
     allMethods.addAll(getIsEnabledMethod());
     allMethods.addAll(getClickMethod());

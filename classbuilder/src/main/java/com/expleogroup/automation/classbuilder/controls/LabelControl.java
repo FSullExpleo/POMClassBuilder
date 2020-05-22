@@ -10,6 +10,7 @@ public class LabelControl extends Control implements IControlBuilder {
   }
 
   public List<String> getAllMethods() {
+    allMethods.clear();
     allMethods.addAll(getIsDisplayedMethod());
     allMethods.addAll(getGetTextMethodContent());
     return allMethods;
