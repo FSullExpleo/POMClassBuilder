@@ -101,6 +101,7 @@ public class ClassBuilderTests {
 
     expected.add("\t" + "public boolean is" + MethodBuilder.getControlNamePascalCase(properties) + "Enabled(){");
     expected.add("\t\t" + "System.out.println(\"Checking is enabled for " + "username" + " " + "text" + "\");");
+    expected.add("\t\t\\\\ \"placeholder for wait for element\"");    
     expected.add("\t\t" + "return " + MethodBuilder.getControlNameCamelCase(properties) + ".isEnabled();");
     expected.add("\t" + "}\n");
 

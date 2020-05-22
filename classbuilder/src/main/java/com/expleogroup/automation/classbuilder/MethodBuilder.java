@@ -37,6 +37,7 @@ public class MethodBuilder {
     signature.add("\t" + "public boolean is" + getControlNamePascalCase(properties) + "Enabled(){");
     signature.add("\t\t" + "System.out.println(\"Checking is enabled for " + properties.getAlias() + " "
         + properties.getElementType() + "\");");
+    signature.add(PLACEHOLDER_FOR_WAIT_FOR_ELEMENT_READY);    
     signature.add("\t\t" + "return " + getControlNameCamelCase(properties) + ".isEnabled();");
     signature.add(METHOD_TERMINATOR);
     return signature;
@@ -47,6 +48,7 @@ public class MethodBuilder {
     signature.add("\t" + "public String get" + getControlNamePascalCase(properties) + "(){");
     signature.add("\t\t" + "System.out.println(\"Getting text of " + properties.getAlias() + " "
         + properties.getElementType() + "\");");
+    signature.add(PLACEHOLDER_FOR_WAIT_FOR_ELEMENT_READY);    
     signature.add("\t\t" + "return " + getControlNameCamelCase(properties) + ".isDisplayed();");
     signature.add(METHOD_TERMINATOR);
     return signature;
@@ -58,6 +60,7 @@ public class MethodBuilder {
         "\t" + "public " + properties.getTargetPageName() + " click" + getControlNamePascalCase(properties) + "(){");
     signature.add(
         "\t\t" + "System.out.println(\"Clicking " + properties.getAlias() + " " + properties.getElementType() + "\");");
+    signature.add(PLACEHOLDER_FOR_WAIT_FOR_ELEMENT_READY);    
     signature.add("\t\t" + getControlNameCamelCase(properties) + ".click();");
     signature.add("\t\t" + "return;");
     signature.add(METHOD_TERMINATOR);
