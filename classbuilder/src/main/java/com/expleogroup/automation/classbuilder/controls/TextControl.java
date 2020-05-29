@@ -14,11 +14,16 @@ public class TextControl extends Control implements IControlBuilder {
     allMethods.addAll(getIsDisplayedMethod());
     allMethods.addAll(getIsEnabledMethod());
     allMethods.addAll(getGetTextMethodContent());
+    allMethods.addAll(getSendKeysMethodContent());
     return allMethods;
   }
 
   public List<String> getGetTextMethodContent() {
     return MethodBuilder.buildGetTextMethodContent(properties);
+  }
+
+  public List<String> getSendKeysMethodContent() {
+    return MethodBuilder.buildSendKeysMethodContent(properties);
   }
 
 }

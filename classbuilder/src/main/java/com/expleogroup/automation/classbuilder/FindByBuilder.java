@@ -20,6 +20,9 @@ public class FindByBuilder {
       case "for":
         signature = getFindByForDeclaration(control);
         break;
+      case "xpath":
+        signature = getFindByXPathDeclaration(control);
+        break;
       default:
         throw new NotImplementedException();
     }
@@ -37,6 +40,10 @@ public class FindByBuilder {
 
   private static List<String> getFindByForDeclaration(Control control) {
     return getFindBy(control, "for");
+  }
+
+  private static List<String> getFindByXPathDeclaration(Control control) {
+    return getFindBy(control, "xpath");
   }
 
   private static List<String> getFindBy(Control control, String how) {
