@@ -1,0 +1,2 @@
+identifier,how,alias,elementType,currentPageName,targetPageName
+txt_username, id, username, text, CSVLoginPage, CSVLoginPage

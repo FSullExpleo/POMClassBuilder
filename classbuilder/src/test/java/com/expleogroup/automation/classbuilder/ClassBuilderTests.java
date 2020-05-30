@@ -14,6 +14,7 @@ import com.expleogroup.automation.classbuilder.controls.ButtonControl;
 import com.expleogroup.automation.classbuilder.controls.Control;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 import com.expleogroup.automation.classbuilder.controls.LabelControl;
+import com.expleogroup.automation.classbuilder.controls.RadioControl;
 import com.expleogroup.automation.classbuilder.controls.TextControl;
 
 /**
@@ -29,6 +30,20 @@ public class ClassBuilderTests {
     pageName = "Login";
     classBuilder = new ClassBuilder(pageName);
   }
+
+  @Test
+  public void canReadFromCSVFile() {
+    List<Control> controls = new ArrayList<Control>();
+    List<ControlProperties> controlProperties =
+        FileReader.readControlsFromCSV(System.getProperty("user.dir") + "\\properties.csv");
+    for (ControlProperties properties : controlProperties) {
+      controls.add(ControlFactory.getControl(properties));
+    }
+
+    writeOutputToScreen(controls);
+
+  }
+
 
   @Test
   public void testCanGenerateHeader() {
@@ -69,12 +84,10 @@ public class ClassBuilderTests {
     List<String> expected = new ArrayList<String>();
 
     expected.add("\t" + "@FindBy(id = \"" + control.getProperties().getIdentifier() + "\")");
-    expected.add(
-        "\t" + "private WebElement " + MethodBuilder.getControlNameCamelCase(properties) + ";\n");
+    expected.add("\t" + "private WebElement " + MethodBuilder.getControlNameCamelCase(properties) + ";\n");
 
     List<String> actual = FindByBuilder.getFindByDeclaration(control);
-    Assert.assertEquals("Did not declare variable with FindBy(id): ", expected.toString(),
-        actual.toString());
+    Assert.assertEquals("Did not declare variable with FindBy(id): ", expected.toString(), actual.toString());
   }
 
   @Test
@@ -85,13 +98,10 @@ public class ClassBuilderTests {
     Control control = new TextControl(properties);
     List<String> expected = new ArrayList<String>();
 
-    expected.add("\t" + "public boolean is" + MethodBuilder.getControlNamePascalCase(properties)
-        + "Displayed(){");
-    expected.add("\t\t" + "System.out.println(\"Checking is displayed for " + "username" + " "
-        + "text" + "\");");
+    expected.add("\t" + "public boolean is" + MethodBuilder.getControlNamePascalCase(properties) + "Displayed(){");
+    expected.add("\t\t" + "System.out.println(\"Checking is displayed for " + "username" + " " + "text" + "\");");
     expected.add("\t\t\\\\ \"placeholder for wait for element\"");
-    expected.add(
-        "\t\t" + "return " + MethodBuilder.getControlNameCamelCase(properties) + ".isDisplayed();");
+    expected.add("\t\t" + "return " + MethodBuilder.getControlNameCamelCase(properties) + ".isDisplayed();");
     expected.add("\t" + "}\n");
 
     Assert.assertEquals("Did not create isDisplayed method: ", expected.toString(),
@@ -107,13 +117,10 @@ public class ClassBuilderTests {
     classBuilder.addControl(control);
     List<String> expected = new ArrayList<String>();
 
-    expected.add("\t" + "public boolean is" + MethodBuilder.getControlNamePascalCase(properties)
-        + "Enabled(){");
-    expected.add("\t\t" + "System.out.println(\"Checking is enabled for " + "username" + " "
-        + "text" + "\");");
+    expected.add("\t" + "public boolean is" + MethodBuilder.getControlNamePascalCase(properties) + "Enabled(){");
+    expected.add("\t\t" + "System.out.println(\"Checking is enabled for " + "username" + " " + "text" + "\");");
     expected.add("\t\t\\\\ \"placeholder for wait for element\"");
-    expected.add(
-        "\t\t" + "return " + MethodBuilder.getControlNameCamelCase(properties) + ".isEnabled();");
+    expected.add("\t\t" + "return " + MethodBuilder.getControlNameCamelCase(properties) + ".isEnabled();");
     expected.add("\t" + "}\n");
 
     Assert.assertEquals("Did not create isEnabled method: ", expected.toString(),
@@ -124,20 +131,38 @@ public class ClassBuilderTests {
   @Test
   public void createProject() {
 
-    List<Control> controls = new ArrayList<Control>();
-    controls.add(new TextControl(new ControlProperties("txt_username", "class", "username", "text",
-        "LoginPage", "LoginPage")));
-    controls.add(new TextControl(
-        new ControlProperties("txt_password", "id", "password", "text", "LoginPage", "LoginPage")));
-    controls.add(new ButtonControl(
-        new ControlProperties("btn_login", "id", "login", "button", "LoginPage", "LandingPage")));
-    controls.add(new ButtonControl(
-        new ControlProperties("btn_logout", "id", "logout", "button", "LandingPage", "LoginPage")));
-    controls.add(new ButtonControl(new ControlProperties("btn_checkout", "id", "checkout", "button",
-        "LandingPage", "CheckoutPage")));
-    controls.add(new LabelControl(
-        new ControlProperties("btn_login", "for", "login", "label", "LoginPage", "LoginPage")));
+    /****
+     * Edit box Link Button Image, image link, an image button Text area Checkbox Radio button
+     * Dropdown list
+     *****/
 
+    List<Control> controls = new ArrayList<Control>();
+    String LOGIN = "LoginPage";
+    String LANDING = "LandingPage";
+    String CHECKOUT = "CheckoutPage";
+
+    controls.add(
+        ControlFactory.getControl(new ControlProperties("txt_username", "class", "username", "text", LOGIN, LOGIN)));
+    controls
+        .add(ControlFactory.getControl(new ControlProperties("txt_password", "id", "password", "text", LOGIN, LOGIN)));
+
+    controls.add(new ButtonControl(new ControlProperties("btn_login", "id", "login", "button", LOGIN, LANDING)));
+    controls.add(new ButtonControl(new ControlProperties("/html/body/div[4]/div/main/div[1]/div/div/a", "xpath",
+        "logout", "button", LANDING, LOGIN)));
+
+    controls
+        .add(new ButtonControl(new ControlProperties("btn_checkout", "id", "checkout", "button", LANDING, CHECKOUT)));
+    controls.add(new LabelControl(new ControlProperties("btn_login", "for", "login", "label", LOGIN, LOGIN)));
+    controls.add(new RadioControl(new ControlProperties("radio_admin", "id", "admin", "radio", LOGIN, LOGIN)));
+    controls
+        .add(new CheckBoxControl(new ControlProperties("checkbox_i_agree", "id", "iAgree", "checkbox", LOGIN, LOGIN)));
+
+    writeOutputToScreen(controls);
+
+  }
+
+
+  private void writeOutputToScreen(List<Control> controls) {
     Map<String, List<Control>> classBuilders = new HashMap<String, List<Control>>();
 
     for (Control control : controls) {
@@ -179,7 +204,6 @@ public class ClassBuilderTests {
       }
 
     }
-
   }
 
 }

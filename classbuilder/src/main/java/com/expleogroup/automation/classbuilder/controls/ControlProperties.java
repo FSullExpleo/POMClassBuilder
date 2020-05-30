@@ -10,12 +10,21 @@ public class ControlProperties {
 
   public ControlProperties(String identifier, String how, String alias, String elementType, String currentPageName,
       String targetPageName) {
-    this.identifier = identifier;
-    this.how = how;
-    this.alias = alias;
-    this.elementType = elementType;
-    this.currentPageName = currentPageName;
-    this.targetPageName = targetPageName;
+    this.identifier = identifier.trim();
+    this.how = how.trim();
+    this.alias = alias.trim();
+    this.elementType = elementType.trim();
+    this.currentPageName = currentPageName.trim();
+    this.targetPageName = targetPageName.trim();
+  }
+
+  public ControlProperties(String[] properties) {
+    this.identifier = properties[0].trim();
+    this.how = properties[1].trim();
+    this.alias = properties[2].trim();
+    this.elementType = properties[3].trim();
+    this.currentPageName = properties[4].trim();
+    this.targetPageName = properties[5].trim();
   }
 
   public String getIdentifier() {
