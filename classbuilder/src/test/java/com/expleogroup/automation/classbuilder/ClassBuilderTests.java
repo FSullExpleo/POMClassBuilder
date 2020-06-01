@@ -10,11 +10,8 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import com.expleogroup.automation.classbuilder.controls.ButtonControl;
 import com.expleogroup.automation.classbuilder.controls.Control;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
-import com.expleogroup.automation.classbuilder.controls.LabelControl;
-import com.expleogroup.automation.classbuilder.controls.RadioControl;
 import com.expleogroup.automation.classbuilder.controls.TextControl;
 
 /**
@@ -145,16 +142,17 @@ public class ClassBuilderTests {
     controls
         .add(ControlFactory.getControl(new ControlProperties("txt_password", "id", "password", "text", LOGIN, LOGIN)));
 
-    controls.add(new ButtonControl(new ControlProperties("btn_login", "id", "login", "button", LOGIN, LANDING)));
-    controls.add(new ButtonControl(new ControlProperties("/html/body/div[4]/div/main/div[1]/div/div/a", "xpath",
+    controls
+        .add(ControlFactory.getControl(new ControlProperties("btn_login", "id", "login", "button", LOGIN, LANDING)));
+    controls.add(ControlFactory.getControl(new ControlProperties("/html/body/div[4]/div/main/div[1]/div/div/a", "xpath",
         "logout", "button", LANDING, LOGIN)));
 
-    controls
-        .add(new ButtonControl(new ControlProperties("btn_checkout", "id", "checkout", "button", LANDING, CHECKOUT)));
-    controls.add(new LabelControl(new ControlProperties("btn_login", "for", "login", "label", LOGIN, LOGIN)));
-    controls.add(new RadioControl(new ControlProperties("radio_admin", "id", "admin", "radio", LOGIN, LOGIN)));
-    controls
-        .add(new CheckBoxControl(new ControlProperties("checkbox_i_agree", "id", "iAgree", "checkbox", LOGIN, LOGIN)));
+    controls.add(ControlFactory
+        .getControl(new ControlProperties("btn_checkout", "id", "checkout", "button", LANDING, CHECKOUT)));
+    controls.add(ControlFactory.getControl(new ControlProperties("btn_login", "for", "login", "label", LOGIN, LOGIN)));
+    controls.add(ControlFactory.getControl(new ControlProperties("radio_admin", "id", "admin", "radio", LOGIN, LOGIN)));
+    controls.add(
+        ControlFactory.getControl(new ControlProperties("checkbox_i_agree", "id", "iAgree", "checkbox", LOGIN, LOGIN)));
 
     writeOutputToScreen(controls);
 
