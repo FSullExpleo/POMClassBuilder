@@ -1,0 +1,4 @@
+1590995003523	Extract method 'splitListOfControlsByType'
+1590995046007	Extract method 'getClassBuildersForTargetPages'
+1590995083999	Rename method 'splitListOfControlsByType'
+1590995216477	Extract method 'printOutEachClass'

@@ -41,7 +41,6 @@ public class ClassBuilderTests {
     }
 
     writeOutputToScreen(controls);
-
   }
 
 
@@ -165,8 +164,14 @@ public class ClassBuilderTests {
   private void writeOutputToScreen(List<Control> controls) {
     Map<String, List<Control>> classBuilders = new HashMap<String, List<Control>>();
 
+    getClassBuildersForCurrentPages(controls, classBuilders);
+    getClassBuildersForTargetPages(controls, classBuilders);
+
+    printOutEachClass(classBuilders);
+  }
+
+  private void getClassBuildersForCurrentPages(List<Control> controls, Map<String, List<Control>> classBuilders) {
     for (Control control : controls) {
-      // System.out.println("Control: " + control.getProperties().getAlias());
       String key = control.getProperties().getCurrentPageName();
       if (classBuilders.containsKey(key)) {
         List<Control> existingControls = classBuilders.get(key);
@@ -177,28 +182,33 @@ public class ClassBuilderTests {
         classBuilders.put(key, new ArrayList<Control>(Arrays.asList(control)));
       }
     }
+  }
 
+  private void getClassBuildersForTargetPages(List<Control> controls, Map<String, List<Control>> classBuilders) {
     for (Control control : controls) {
       String key = control.getProperties().getTargetPageName();
       if (!classBuilders.containsKey(key)) {
         classBuilders.put(key, new ArrayList<Control>());
       }
     }
+  }
 
+  private void printOutEachClass(Map<String, List<Control>> classBuilders) {
     for (Map.Entry<String, List<Control>> classBuilder : classBuilders.entrySet()) {
-      // System.out.println("Entry: " + classBuilder.getKey());
       ClassBuilder outputClass = new ClassBuilder(classBuilder.getKey());
-      List<String> outputContent = outputClass.getClassDeclaration();
+      List<String> outputContent = new ArrayList<>();
 
+      // gather class content
+      outputContent = outputClass.getClassDeclaration();
       for (Control control : classBuilder.getValue()) {
         outputContent.addAll(FindByBuilder.getFindByDeclaration(control));
       }
-
       for (Control control : classBuilder.getValue()) {
         outputContent.addAll(control.getAllMethods());
       }
-
       outputContent.add(outputClass.getClassTerminator());
+
+      // print out class content
       for (String row : outputContent) {
         System.out.println(row);
       }
