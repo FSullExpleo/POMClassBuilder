@@ -2,56 +2,78 @@ package com.expleogroup.automation.classbuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.expleogroup.automation.classbuilder.controls.Control;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class FindByBuilder {
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 
-  public static List<String> getFindByDeclaration(Control control) {
+import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 
-    List<String> signature;
-    switch (control.getProperties().getHow()) {
+public class FindByBuilder extends ControlProperties {
+	
+	  protected ControlProperties properties;
+	  public FindByBuilder(ControlProperties properties) {
+	    super(properties);
+	  }
+public List<String> getFindByDeclaration(ControlProperties properties) {
+	List<String> signature = null;
+	 String Identifier= properties.getHow();
+     switch (Identifier) {
       case "id":
-        signature = getFindByIdDeclaration(control);
+        signature = getFindByIdDeclaration(properties);
         break;
       case "class":
-        signature = getFindByClassDeclaration(control);
+        signature = getFindByClassDeclaration(properties);
         break;
       case "for":
-        signature = getFindByForDeclaration(control);
+        signature = getFindByForDeclaration(properties);
         break;
-      case "xpath":
-        signature = getFindByXPathDeclaration(control);
-        break;
-      default:
-        throw new NotImplementedException();
+      case "Xpath":
+          signature = getFindByXpathDeclaration(properties);
+          break;
+       default:
+       System.out.println("Not Found");;
+
     }
 
     return signature;
   }
 
-  private static List<String> getFindByClassDeclaration(Control control) {
-    return getFindBy(control, "class");
+  private  List<String> getFindByClassDeclaration(ControlProperties properties) {
+    return getFindBy(properties, "class");
   }
 
-  private static List<String> getFindByIdDeclaration(Control control) {
-    return getFindBy(control, "id");
+  private  List<String> getFindByIdDeclaration(ControlProperties properties) {
+    return getFindBy(properties, "id");
   }
 
-  private static List<String> getFindByForDeclaration(Control control) {
-    return getFindBy(control, "for");
+  private  List<String> getFindByForDeclaration(ControlProperties properties) {
+    return getFindBy(properties, "for");
   }
+  private List<String> getFindByXpathDeclaration(ControlProperties properties) {
+	    return getFindBy(properties, "xpath");
+	  }
 
-  private static List<String> getFindByXPathDeclaration(Control control) {
-    return getFindBy(control, "xpath");
-  }
 
-  private static List<String> getFindBy(Control control, String how) {
+/*  private  List<String> getFindBy(ControlProperties properties,String how) {
     List<String> signature = new ArrayList<String>();
     signature
-        .add("\t" + "@FindBy(" + how + " = \"" + control.getProperties().getIdentifier() + "\")");
+        .add("\t" + "@FindBy(" + how + " = \"" + properties.getHow() + "\")");
     signature.add("\t" + "private WebElement "
-        + MethodBuilder.getControlNameCamelCase(control.getProperties()) + ";\n");
+        + MethodBuilder.getControlNameCamelCase(properties) + ";\n");
     return signature;
+  }*/
+  // Add by Neeraj
+  private  List<String> getFindBy(ControlProperties properties,String how) {
+	    List<String> signature = new ArrayList<String>();
+	    signature
+	        .add("\t" + "@FindBy(how = How."+how + ",Using = \""+properties.getElementType() +"\")\t");
+	    signature.add("\t" + "private WebElement "
+	        + MethodBuilder.getControlNameCamelCase(properties)+ ";\n");
+	    return signature;
+	  } 
+  //Neeraj added to create xpath.
+  public String createXpath(String htmlTag,String idText){
+	 
+	String xpathtring = ("\t"+".//"+htmlTag+"[@id='" + idText + "'])\t");
+	return xpathtring;
   }
 }

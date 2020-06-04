@@ -18,16 +18,12 @@ public class ControlProperties {
     this.targetPageName = targetPageName.trim();
   }
 
-  public ControlProperties(String[] properties) {
-    this.identifier = properties[0].trim();
-    this.how = properties[1].trim();
-    this.alias = properties[2].trim();
-    this.elementType = properties[3].trim();
-    this.currentPageName = properties[4].trim();
-    this.targetPageName = properties[5].trim();
+  public ControlProperties(ControlProperties properties) {
+  
   }
 
-  public String getIdentifier() {
+
+public String getIdentifier() {
     return this.identifier;
   }
 

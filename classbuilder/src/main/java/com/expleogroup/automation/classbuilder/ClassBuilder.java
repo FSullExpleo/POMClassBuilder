@@ -11,6 +11,7 @@ public class ClassBuilder {
   private String pageName;
   private List<String> classDeclaration = new ArrayList<String>();
   private List<String> constructor = new ArrayList<String>();
+  private List<String> importLib = new ArrayList<String>();
   private List<Control> controls = new ArrayList<Control>();
 
   public ClassBuilder() {}
@@ -32,6 +33,16 @@ public class ClassBuilder {
     constructor.add("this.webDriver = webDriver;");
     constructor.add("}");
   }
+  private void createImportLib() {
+		importLib.clear();
+		importLib.add("import org.openqa.selenium.Keys;");
+		importLib.add("import org.openqa.selenium.WebDriver;");
+		importLib.add("import org.openqa.selenium.WebElement;");
+		importLib.add("import org.openqa.selenium.support.FindBy;");
+		importLib.add("import org.openqa.selenium.support.FindBys;");
+		importLib.add("import org.openqa.selenium.support.PageFactory;");
+		importLib.add("\t\t\t");
+	}
 
   private void createClassTerminator() {
     classTerminator = END_OF_FILE_MARKER;
@@ -44,7 +55,9 @@ public class ClassBuilder {
   public List<String> getConstructor() {
     return constructor;
   }
-
+  public List<String> getImportLib() {
+	    return constructor;
+	  }
   public String getClassTerminator() {
     return classTerminator;
   }
