@@ -13,7 +13,7 @@ import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 public class FileReader {
 
   static List<ControlProperties> readControlsFromCSV(String fileName) {
-    List<ControlProperties> controlProperties = new ArrayList<>();
+    List<ControlProperties> controlProperties = new ArrayList<ControlProperties>();
     Path pathToFile = Paths.get(fileName);
 
     try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
