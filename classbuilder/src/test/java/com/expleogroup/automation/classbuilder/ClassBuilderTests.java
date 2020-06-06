@@ -194,7 +194,7 @@ public class ClassBuilderTests {
   private void printOutEachClass(Map<String, List<Control>> classBuilders) {
     for (Map.Entry<String, List<Control>> classBuilder : classBuilders.entrySet()) {
       ClassBuilder outputClass = new ClassBuilder(classBuilder.getKey());
-      List<String> outputContent = new ArrayList<>();
+      List<String> outputContent = new ArrayList<String>();
 
       // gather class content
       outputContent = outputClass.getClassDeclaration();
