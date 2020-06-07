@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 
 public class FileHandler {
@@ -36,6 +35,24 @@ public class FileHandler {
     return controlProperties;
   }
 
+
+  public static void writeStringToCSV(String fileName, String output) {
+    Path pathToFile = Paths.get(fileName);
+
+    File file = new File(fileName);
+    FileWriter fr;
+    try {
+      fr = new FileWriter(file, true);
+      BufferedWriter bw = new BufferedWriter(fr);
+      bw.append(output + "\n");
+      System.out.println("Printing " + output);
+      bw.close();
+      fr.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void writeControlsToCSV(String fileName, List<ControlProperties> controlProperties) {
     Path pathToFile = Paths.get(fileName);
 
@@ -44,26 +61,17 @@ public class FileHandler {
     try {
       fr = new FileWriter(file, true);
       BufferedWriter bw = new BufferedWriter(fr);
-      for (ControlProperties cp: controlProperties){      
+      for (ControlProperties cp : controlProperties) {
         bw.append(cp.getPropertiesAsString());
         System.out.println("Printing " + cp.getPropertiesAsString());
-      } 
+      }
+      bw.append("\n");
       bw.close();
       fr.close();
 
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
-//    try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.US_ASCII) ) {
-//    
-//      for (ControlProperties cp: controlProperties){      
-//        bw.append(cp.getPropertiesAsString());
-//      } 
-//      bw.close();  
-//    } catch (IOException ioe) {
-//      ioe.printStackTrace();
-//    }
   }
 
 }

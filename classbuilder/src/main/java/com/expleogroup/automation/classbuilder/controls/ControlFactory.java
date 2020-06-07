@@ -1,13 +1,17 @@
-package com.expleogroup.automation.classbuilder;
+package com.expleogroup.automation.classbuilder.controls;
 
-import com.expleogroup.automation.classbuilder.controls.ButtonControl;
-import com.expleogroup.automation.classbuilder.controls.CheckBoxControl;
-import com.expleogroup.automation.classbuilder.controls.Control;
-import com.expleogroup.automation.classbuilder.controls.ControlProperties;
-import com.expleogroup.automation.classbuilder.controls.LabelControl;
-import com.expleogroup.automation.classbuilder.controls.RadioControl;
-import com.expleogroup.automation.classbuilder.controls.TextControl;
 import sun.security.util.PendingException;
+
+/****
+ * [22/05 14:44] Neeraj Kumar
+ * Edit box
+ * Link
+ * Button
+ * Image, image link, an image button
+ * Text area
+ * Checkbox
+ * Radio button
+ * Dropdown list*****/
 
 public class ControlFactory {
 

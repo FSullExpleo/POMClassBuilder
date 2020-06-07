@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.expleogroup.automation.classbuilder.controls.Control;
+import com.expleogroup.automation.classbuilder.controls.ControlFactory;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 import com.expleogroup.automation.classbuilder.controls.TextControl;
 import com.expleogroup.automation.utilities.FileHandler;
@@ -199,6 +200,7 @@ public class ClassBuilderTests {
 
       // gather class content
       outputContent = outputClass.getClassDeclaration();
+      outputContent.addAll(outputClass.getImportLib());
       for (Control control : classBuilder.getValue()) {
         outputContent.addAll(FindByBuilder.getFindByDeclaration(control));
       }
