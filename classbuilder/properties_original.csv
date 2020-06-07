@@ -1,0 +1,9 @@
+identifier,how,alias,elementType,currentPageName,targetPageName
+txt_username,id,username,text,CSVLoginPage,CSVLoginPage
+txt_password,id,password,text,CSVLoginPage,CSVLoginPage
+btn_login,id,login,button,CSVLoginPage,CSVLandingPage
+/html/body/div[4]/div/main/div[1]/div/div/a,xpath,logout,button,CSVLandingPage,CSVLoginPage
+btn_checkout,id,checkout,button,CSVLandingPage,CSVCheckoutPage
+btn_login,for,login,label,CSVLoginPage,CSVLoginPage
+radio_admin,id,admin,radio,CSVLoginPage,CSVLoginPage
+checkbox_i_agree,id,iAgree,checkbox,CSVLoginPage,CSVLoginPage

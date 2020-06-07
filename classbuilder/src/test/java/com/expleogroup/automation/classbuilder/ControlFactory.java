@@ -1,6 +1,7 @@
 package com.expleogroup.automation.classbuilder;
 
 import com.expleogroup.automation.classbuilder.controls.ButtonControl;
+import com.expleogroup.automation.classbuilder.controls.CheckBoxControl;
 import com.expleogroup.automation.classbuilder.controls.Control;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 import com.expleogroup.automation.classbuilder.controls.LabelControl;

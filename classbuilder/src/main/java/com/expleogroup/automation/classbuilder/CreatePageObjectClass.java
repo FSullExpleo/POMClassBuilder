@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -26,12 +28,13 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import com.expleogroup.automation.classbuilder.controls.ButtonControl;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
+import com.expleogroup.automation.utilities.FileHandler;
 
 public class CreatePageObjectClass extends ReadAllUrlLinksFromPage {
 	public static ArrayList<String> radioButton = new ArrayList<String>();
 	// public static ArrayList<String> classMap = new ArrayList<String>();
-	public static ArrayList<String> findByMap = new ArrayList<String>();
-	public static ArrayList<String> Title = new ArrayList<String>();
+	protected static List<String> findByMap = new ArrayList<>();
+	public static List<String> title = new ArrayList<String>();
 	public static HashMap<String, String> inputRadioButtonMap = new HashMap<String, String>();
 	public static HashMap<String, String> actualHashMap = new HashMap<String, String>();
 	public static HashMap<String, String> controlMap = new HashMap<String, String>();
@@ -153,7 +156,7 @@ public class CreatePageObjectClass extends ReadAllUrlLinksFromPage {
 			}
 			continue;
 		}
-		return findByMap;
+		return (ArrayList<String>) findByMap;
 	}
 
 	// Return Of the
@@ -174,8 +177,9 @@ public class CreatePageObjectClass extends ReadAllUrlLinksFromPage {
 				ControlProperties controlProperties = new ControlProperties(inputRadioButtonMap.get("id"),
 						inputRadioButtonMap.get("id"), inputRadioButtonMap.get("alias"), "Xpath",
 						"https://materializecss.com/radio-buttons.html", URL);
-				ButtonControl buttonControl = new ButtonControl(controlProperties);
+		        ButtonControl buttonControl = new ButtonControl(controlProperties);
 				radioButton.addAll(buttonControl.getAllMethods());
+	            FileHandler.writeControlsToCSV(System.getProperty("user.dir") + "\\properties_out.csv", Arrays.asList(controlProperties));
 			}
 			if ((input.attr("type").contentEquals("button") || input.attr("type").contentEquals("submit"))
 					&& input.hasAttr("id") && !input.attr("class").isEmpty()) {
@@ -184,9 +188,9 @@ public class CreatePageObjectClass extends ReadAllUrlLinksFromPage {
 				ControlProperties controlProperties = new ControlProperties(inputRadioButtonMap.get("id"), "Xpath",
 						inputRadioButtonMap.get("alias"), inputRadioButtonMap.get("id"),
 						"https://materializecss.com/radio-buttons.html", url);
-				ButtonControl buttonControl = new ButtonControl(controlProperties);
+		        ButtonControl buttonControl = new ButtonControl(controlProperties);
 				radioButton.addAll(buttonControl.getAllMethods());
-
+				FileHandler.writeControlsToCSV(System.getProperty("user.dir") + "\\properties_out.csv", Arrays.asList(controlProperties));
 			}
 			continue;
 		}
@@ -211,7 +215,7 @@ public class CreatePageObjectClass extends ReadAllUrlLinksFromPage {
 	public static void printClasses(HashMap<String, ArrayList<String>> hashMap, String title, String Package,
 			Document doc) throws FileNotFoundException, UnsupportedEncodingException {
 		PrintWriter writer = new PrintWriter(
-				"C:/Users/KumarN/Documents/Projects/POMClassBuilder-master/Newfolder/" + title + ".java", "UTF-8");
+				System.getProperty("user.dir") + "/target/" + title + ".java", "UTF-8");
 		writer.println("package " + Package);
 		writer.println();
 

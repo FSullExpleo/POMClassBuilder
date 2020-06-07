@@ -26,6 +26,15 @@ public class ControlProperties {
     this.currentPageName = properties[4].trim();
     this.targetPageName = properties[5].trim();
   }
+  
+  public String getPropertiesAsString(){
+    return this.identifier + "," + 
+    this.how + "," + 
+    this.alias + "," + 
+    this.elementType + "," + 
+    this.currentPageName + "," + 
+    this.targetPageName;
+  }
 
   public String getIdentifier() {
     return this.identifier;

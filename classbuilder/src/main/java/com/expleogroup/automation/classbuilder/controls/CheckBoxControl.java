@@ -1,13 +1,11 @@
-package com.expleogroup.automation.classbuilder;
+package com.expleogroup.automation.classbuilder.controls;
 
 import java.util.List;
-import com.expleogroup.automation.classbuilder.controls.Control;
-import com.expleogroup.automation.classbuilder.controls.ControlProperties;
-import com.expleogroup.automation.classbuilder.controls.IControlBuilder;
+import com.expleogroup.automation.classbuilder.MethodBuilder;
 
 public class CheckBoxControl extends Control implements IControlBuilder {
 
-  protected CheckBoxControl(ControlProperties properties) {
+  public CheckBoxControl(ControlProperties properties) {
     super(properties);
   }
 

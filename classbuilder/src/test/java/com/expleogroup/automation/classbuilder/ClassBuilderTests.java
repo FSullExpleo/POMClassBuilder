@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.expleogroup.automation.classbuilder.controls.Control;
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 import com.expleogroup.automation.classbuilder.controls.TextControl;
+import com.expleogroup.automation.utilities.FileHandler;
 
 /**
  * Unit tests for page object builder
@@ -32,7 +33,7 @@ public class ClassBuilderTests {
   public void canReadFromCSVFile() {
     List<Control> controls = new ArrayList<Control>();
     List<ControlProperties> controlProperties =
-        FileReader.readControlsFromCSV(System.getProperty("user.dir") + "\\properties.csv");
+        FileHandler.readControlsFromCSV(System.getProperty("user.dir") + "\\properties.csv");
     for (ControlProperties properties : controlProperties) {
       controls.add(ControlFactory.getControl(properties));
     }
