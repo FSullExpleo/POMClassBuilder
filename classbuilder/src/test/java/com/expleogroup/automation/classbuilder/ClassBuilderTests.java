@@ -199,7 +199,7 @@ public class ClassBuilderTests {
       // gather class content
       outputContent = outputClass.getClassDeclaration();
       for (Control control : classBuilder.getValue()) {
-        outputContent.addAll(FindByBuilder.getFindByDeclaration(control));
+        outputContent.addAll(FindByBuilder.getFindByDeclaration(properties));
       }
       for (Control control : classBuilder.getValue()) {
         outputContent.addAll(control.getAllMethods());

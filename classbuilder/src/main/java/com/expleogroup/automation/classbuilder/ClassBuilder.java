@@ -18,17 +18,20 @@ public class ClassBuilder {
 
   public ClassBuilder(String pageName) {
     this.pageName = pageName;
+    createImportLib();
     createClassDeclaration();
     createConstructor();
     createClassTerminator();
   }
 
   private void createClassDeclaration() {
+	classDeclaration.clear();
     classDeclaration.add("public class " + pageName + "(){");
     classDeclaration.add(" ");
   }
 
   private void createConstructor() {
+	constructor.clear();
     constructor.add(pageName + "Page(WebDriver webDriver){");
     constructor.add("this.webDriver = webDriver;");
     constructor.add("}");
@@ -56,7 +59,7 @@ public class ClassBuilder {
     return constructor;
   }
   public List<String> getImportLib() {
-	    return constructor;
+	    return importLib;
 	  }
   public String getClassTerminator() {
     return classTerminator;

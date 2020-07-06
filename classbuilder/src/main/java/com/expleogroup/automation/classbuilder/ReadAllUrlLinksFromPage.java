@@ -20,7 +20,7 @@ public class ReadAllUrlLinksFromPage {
   }*/
 
 
- static HashMap<String, String> getAllPageUrlLinks(String URL) throws IOException {
+ HashMap<String, String> getAllPageUrlLinks(String URL) throws IOException {
      
     	
         Document document = Jsoup.connect(URL).get();
@@ -30,9 +30,11 @@ public class ReadAllUrlLinksFromPage {
         	
           if (!page.attr("href").isEmpty()||page.attr("href").contains("https") ) {
         	  String urlString = page.attr("href");
-          	String pageNo="pageNo "+i;
+        	  System.out.println("Test   Neeraj"+UrlLinks);
+        	 String pageNo="pageNo "+i;
             UrlLinks.put(pageNo,urlString);
             i =i + 1;
+          
             continue;
           }
         }

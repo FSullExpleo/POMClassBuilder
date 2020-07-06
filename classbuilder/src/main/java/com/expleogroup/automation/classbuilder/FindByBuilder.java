@@ -3,8 +3,6 @@ package com.expleogroup.automation.classbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-
 import com.expleogroup.automation.classbuilder.controls.ControlProperties;
 
 public class FindByBuilder extends ControlProperties {
@@ -23,9 +21,21 @@ public List<String> getFindByDeclaration(ControlProperties properties) {
       case "class":
         signature = getFindByClassDeclaration(properties);
         break;
+      case "input":
+          signature = getFindByClassDeclaration(properties);
+          break;
+      case "linkText":
+          signature = getFindByClassDeclaration(properties);
+          break;
       case "for":
         signature = getFindByForDeclaration(properties);
         break;
+      case "form":
+          signature = getFindByForDeclaration(properties);
+          break;
+      case "iframe":
+          signature = getFindByForDeclaration(properties);
+          break;
       case "Xpath":
           signature = getFindByXpathDeclaration(properties);
           break;
@@ -65,7 +75,7 @@ public List<String> getFindByDeclaration(ControlProperties properties) {
   private  List<String> getFindBy(ControlProperties properties,String how) {
 	    List<String> signature = new ArrayList<String>();
 	    signature
-	        .add("\t" + "@FindBy(how = How."+how + ",Using = \""+properties.getElementType() +"\")\t");
+	        .add("\t" + "@FindBy(how = How."+how + ",Using = \""+properties.getAlias() +"\")\t");
 	    signature.add("\t" + "private WebElement "
 	        + MethodBuilder.getControlNameCamelCase(properties)+ ";\n");
 	    return signature;
